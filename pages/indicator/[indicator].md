@@ -56,11 +56,11 @@ Attribution: {indicatorMeta[0].Attribution}
         />
    
     </Tab>
-   <Tab label="Table">
+   <!-- <Tab label="Table">
    <DataTable data={ziIndicators} 
    rows=all
     />
-   </Tab>
+   </Tab> -->
     <Tab label="Heatmap">
         <div id="ttt" style="width: {13 * years.length}em;  ">
             <Heatmap 
