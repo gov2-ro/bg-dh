@@ -94,7 +94,13 @@
     ul.dropdown {z-index: 3;}
     ul.dropdown ul {z-index: 5;}
     ul.dropdown,
-    ul.dropdown ul {z-index: 5; width: auto; max-width: 40em; margin-left: -5em; font-size: 15px; box-shadow: 1px 2px 3px rgba(0,0,0,.2); }
+    ul.dropdown ul {z-index: 5; width: auto; max-width: 66em;  font-size: 15px; box-shadow: 1px 2px 3px rgba(0,0,0,.2); }
+    ul.sub-dropdown {
+          margin-left: -75%;
+          z-index: 8; 
+          width: auto; max-width: 60em; 
+        }
+    
     ul.dropdown ul * {width: auto; max-width: 60em !important; }
     ul.dropdown li {
         line-height: 1.2;
@@ -140,6 +146,7 @@
             padding: 0;
             margin: 0;
         }
+       
         .menu-item.open > .dropdown,
         .dropdown-item.open > .sub-dropdown {
             display: block;
