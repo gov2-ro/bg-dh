@@ -22,8 +22,9 @@
         {#if component.ThemeID == theme.ID}
         <div class="level-1-wrapper">
             <h3> <b>{component.Name}</b></h3>
+            
+            <Details title="Details" class="mt-0 xx">
             <div class="description">{component.Description}</div>
-            <Details title="Indicators" class="mt-0 xx">
             <div class="level-1">
             {#each qIndicators as indicator}        
                 {#if indicator.Component == component.id}
