@@ -55,7 +55,7 @@ SELECT
  
 </div>
 
-<div class="bg-sky-100 px-6 rounded-md pt-2">
+<div class="bg-sky-200 px-6 rounded-md pt-2">
 
 ## How does EU Compass work?
 
@@ -76,19 +76,29 @@ As of November 2024 EU Compass is already ready to use due to pooling of a first
 </div>
 
 <div class="">
-<div class="text-xl  text-center  mb-4 bg-yellow-50	 border p-2 rounded" >
-See the full <a class="markdown font-bold" href="/indicator/">list of indicators </a></div>
+
+<div class="flex mb-2 gap-4 ">
+
+<div class="  text-center   bg-yellow-50	 border p-2 px-4 rounded shadow-sm" >
+See   <a class="markdown font-bold" href="/indicator/"> indicators </a></div>
+<div class="bg-slate-50 text-center  p-2 border px-4 rounded shadow-sm">&rarr;  <a href="/downloads/" class="font-bold  markdown">download data</a></div>
+
+</div>
+
+<div class="text-sm leading-none p-2 border-t mt-6 pt-3">
+
 
 For more questions on how to use EU Compass or consult Methodology: deristavi@transparency.org 
 
 Variables may have different citation requirements. <br />Please respect them!
  
-
  </div>
 
  </div>
 
-<div class="bg-slate-50 text-center p-5 border text-lg">&rarr;  <a href="/downloads/" class="font-bold  markdown">Download data</a></div>
+ </div>
+
+
 
 <div class="mt-10 pt-10">
 
