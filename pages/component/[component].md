@@ -24,10 +24,6 @@ SELECT * FROM Indicators WHERE Component = '${params.component}'
  {/each}
  </div>
 
-
-
- 
-
  <style>
  .xlist h3 {font-weight: bold;}
  .xlist p {line-height: 1.2;margin-bottom: 1ex; font-size: .9em;}

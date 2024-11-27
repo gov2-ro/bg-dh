@@ -23,7 +23,7 @@ export let data;
 		<div class="group  nav-indicators " style="width: 20em;">
 			 
 				<div class=" ">
-					<a href="x" class="border p-2 markdown">Themes</a>
+					<a href="#" class="border p-2 markdown">Themes</a>
 				</div>
 				<div class=" px-4 grid bg-sky-100 hidden group-hover:block mt-10 pt-10">
 					<div class="mt-10">&nbsp;</div>
