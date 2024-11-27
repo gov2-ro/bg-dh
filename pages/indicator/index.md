@@ -34,7 +34,7 @@ JOIN
 	<Column id=Indicator_Link contentType=link linkLabel=Indicator_Name  /> 
 </DataTable>
 
-
+ 
 
 # Detalied view
 
@@ -42,4 +42,4 @@ Use the list below to browse Themes, Components and Indicators descriptions. <br
 
 ---
 
-<ThemesToc />
+<ThemesTocStatic />

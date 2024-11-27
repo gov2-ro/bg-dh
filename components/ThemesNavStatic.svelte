@@ -1,7 +1,7 @@
 <div class="oo"><button class="menu-toggle s-pA-OhIC2akyr">☰ Menu</button>
     <nav class="s-pA-OhIC2akyr">
         <ul class="menu  s-pA-OhIC2akyr">
-            <li class="menu-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr">Transparency</a>
+            <li class="menu-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr leading-none text-sm">Transparency</a>
                 <ul class="dropdown s-pA-OhIC2akyr">
                     <li class="dropdown-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr">Fiscal
                             Transparency</a>
@@ -51,7 +51,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="menu-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr">Corruption Measures</a>
+            <li class="menu-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr leading-none text-sm">Corruption Measures</a>
                 <ul class="dropdown s-pA-OhIC2akyr">
                     <li class="dropdown-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr">Corruption
                             Perception</a>
@@ -80,9 +80,9 @@
                     </li>
                 </ul>
             </li>
-            <li class="menu-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr">Freedom of Expression</a>
+            <li class="menu-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr leading-tight text-sm">Freedom of Expression</a>
                 <ul class="dropdown s-pA-OhIC2akyr">
-                    <li class="dropdown-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr">Press
+                    <li class="dropdown-item s-pA-OhIC2akyr"><a href="#" class="text-sm s-pA-OhIC2akyr">Press
                             Freedom</a>
                         <ul class="sub-dropdown s-pA-OhIC2akyr">
                             <li class="s-pA-OhIC2akyr"><a href="/indicator/PFI Score" class="s-pA-OhIC2akyr">Press
@@ -91,7 +91,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="menu-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr">Regulation</a>
+            <li class="menu-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr leading-none text-sm">Regulation</a>
                 <ul class="dropdown s-pA-OhIC2akyr">
                     <li class="dropdown-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr">Public
                             accountability</a>
@@ -146,7 +146,7 @@
                                     Oversight (EUROPAM)</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr">Freedom of
+                    <li class="dropdown-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr text-sm">Freedom of
                             Information Regulation</a>
                         <ul class="sub-dropdown s-pA-OhIC2akyr">
                             <li class="s-pA-OhIC2akyr"><a href="/indicator/FOI-Score" class="s-pA-OhIC2akyr">Freedom of
@@ -185,7 +185,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="menu-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr">Internet Empowerment</a>
+            <li class="menu-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr leading-none text-sm">Internet Empowerment</a>
                 <ul class="dropdown s-pA-OhIC2akyr">
                     <li class="dropdown-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr">E-Services</a>
                         <ul class="sub-dropdown s-pA-OhIC2akyr">
@@ -202,7 +202,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="menu-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr">Enforcement</a>
+            <li class="menu-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr leading-none text-sm">Enforcement</a>
                 <ul class="dropdown s-pA-OhIC2akyr">
                     <li class="dropdown-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr">Judicial
                             Independence</a>

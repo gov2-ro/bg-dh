@@ -53,7 +53,7 @@ SELECT
  
 </div>
 
-<div class="bg-slate-200 px-6 rounded-md pt-2">
+<div class="bg-sky-100 px-6 rounded-md pt-2">
 
 ## How does EU Compass work?
 
@@ -86,15 +86,15 @@ Variables may have different citation requirements. Please respect them!
 
  </div>
 
+<div class="bg-slate-50 text-center p-5 border text-lg">&rarr;  <a href="/downloads/" class="font-bold  markdown">Download data</a></div>
 
+<div class="mt-10 pt-10">
 
 ---
 
----
-
-
-<div style="height: 33rem; width: 33rem; " class="float-right">
+ <div style="height: 33rem; width: 33rem; margin: auto;" >
   <InteractiveSVG1 src="/assets/dh-pie.svg"  /> 
+</div> 
 </div>
 
 

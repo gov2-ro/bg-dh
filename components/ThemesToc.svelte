@@ -15,29 +15,26 @@
  
 {#each qThemes as theme}
 <div class="level-0-wrapper mb-8 pb-8">
-    <h2 class="bg-sky-100 p-2 text-xl rounded-t inline-block mb-0"><b>{theme.Name}</b></h2>
-    <div class="xdescription bg-sky-50	 p-2 rounded-bl rounded-br rounded-tr leading-tight text-base">  {theme.Description}</div>
-    <div class="level-0">
+    <h2 class="bg-sky-200 px-3 pt-1 pb-0 text-xl rounded-t inline-block font-bold">{theme.Name}</h2>
+    <div class="xdescription text-lg bg-sky-200 p-3  pb-4 rounded-bl rounded-br rounded-tr leading-tight text-base" style="max-width: 45em;">  {theme.Description}</div>
+    <div class="level-0   xl:columns-2 2xl:columns-3 pt-2">
     {#each qComponents as component}
         {#if component.ThemeID == theme.ID}
-        <div class="level-1-wrapper">
-            <h3> <b>{component.Name}</b></h3>
-            
-            <Details title="Components" class="mt-0 xx">
-            <div class="description">{component.Description}</div>
-            <div class="level-1">
+        <div class="level-1-wrapper p-0 rounded shadow mb-4 border border-sky-300 leading-tight">
+            <h3 class="border-b border-sky-400 bg-sky-200 px-2 py-2 font-bold"> {component.Name}</h3>     
+            <div class="description bg-sky-50 p-3 ">{component.Description}</div>
+            <div class="level-1 px-3 py-2 bg-yellow-50 border-t border-sky-300 ">
             {#each qIndicators as indicator}        
                 {#if indicator.Component == component.id}
-                <div class="level-2">
-                <h4> <b><a href="/indicator/{indicator.id}" class="markdown">{indicator.Name}</a></b></h4>                    
-                <div class="description">{indicator.Description}</div>
-                </div>
-                
+                <div class="level-2 mt-1 mb-2">
+                    <h4> <b><a href="/indicator/{indicator.id}" class="markdown">{indicator.Name}</a></b></h4>                    
+                    <div class="description text-sm">{indicator.Description}</div>
+                </div>                
                 {/if}
             {/each}
+            </div>
         </div>
-    </Details>
-        </div>
+    
         {/if}   
     {/each}
     </div>
@@ -47,27 +44,7 @@
 {/each}
  
 <style>
-    div:empty {display: none;}
-    div:not(.level-2) {margin-bottom: 1ex;}
-    xh2 { font-size: 1.4em;}
-
-    .level-2 {font-size: .9em;}
-    
+    div:empty {display: none;}  
     .level-1-wrapper {break-inside: avoid;  }
-    .description {font-size: .9em; color: #666; margin-bottom: 1ex; line-height: 1.2; max-width: 60em;}
-    .level-0-wrapper .description {line-height: 1.4;}
-    .level-0-wrapper >  .description {color: black; font-size: 1.1em;}
-    .level-1-wrapper >  .description {color: black; }
-    .level-2 .description {line-height: 1.2;}
-    @media (max-width: 1480px) {
-        .level-0 {column-count: 2;}
-    }
-    @media (max-width: 800px) {
-        .level-0 {column-count: 1;}
-    }
-    @media (min-width: 1480px) {
-        .level-0 {column-count: 3;}
-    }
-  
-
+    .description {  max-width: 60em;}
 </style>
