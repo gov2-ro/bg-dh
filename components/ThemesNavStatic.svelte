@@ -1,6 +1,7 @@
-<div class="oo"><button class="menu-toggle s-pA-OhIC2akyr">☰ Menu</button>
+<div class="oo">
+    <!--<button class="menu-toggle s-pA-OhIC2akyr">☰ Menu</button>-->
     <nav class="s-pA-OhIC2akyr">
-        <ul class="menu  s-pA-OhIC2akyr">
+        <ul class="menu s-pA-OhIC2akyr">
             <li class="menu-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr leading-none text-sm">Transparency</a>
                 <ul class="dropdown s-pA-OhIC2akyr">
                     <li class="dropdown-item s-pA-OhIC2akyr"><a href="#" class="s-pA-OhIC2akyr">Fiscal
@@ -236,10 +237,11 @@
     .menu-toggle {
         display: none;
     }
+   
 
     @media screen and (min-width: 769px) {
         nav {
-            display: flex;
+            display: flex; 
             justify-content: center;
         }
 
@@ -248,6 +250,9 @@
             display: flex;
             padding: 0;
             margin: 0;
+        }
+        .menu a:has(+ ul:empty) {
+            display: none;
         }
 
         .menu-item {
@@ -268,7 +273,7 @@
             list-style: none;
             padding: 0;
             margin: 0;
-            background-color: #fff;
+            background-color: #334;
         }
 
         .menu-item:hover>.dropdown,
@@ -278,7 +283,7 @@
 
         .dropdown-item {
             position: relative;
-            background-color: #f9f9f9;
+            background-color: #445;
         }
 
         .dropdown-item>a {
@@ -324,11 +329,10 @@
     }
 
     ul.dropdown li:not(:last-child) {
-        border-bottom: 1px solid #CCC;
-    }
+     }
 
     ul.dropdown ul li:hover {
-        background-color: #fCfCc0;
+        background-color: #003;
     }
 
     @media screen and (max-width: 768px) {

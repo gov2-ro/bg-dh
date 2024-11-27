@@ -40,14 +40,16 @@ SELECT
  
  
  
-<div class="grid grid-cols-2 gap-6 ">
+<div class="grid md:grid-cols-2 gap-6 ">
 <div class="">
+ 
+<img src="assets/bridgegap-logo.svg" class="mb-4" style="height: 3.3em;" />
 
-# Welcome to DataHub
 
-<div class="text-lg mb-2">Welcome to the DataHub of BridgeGap. This resource includes data repositories and analytic tools, as follows:</div>
 
-- All current databases used for research in BridgeGap pooled by partners, at country and multicountry level
+<div class="text-lg mb-2"><b>Welcome to the DataHub</b> of <b>BridgeGap</b>. This resource includes data repositories and analytic tools, as follows:</div>
+
+- All current databases used for research in [BridgeGap](https://corruptiondata.eu)  pooled by partners, at country and multicountry level
 - EU Compass analytical database, pooling data at national level following the UNODC Statistical Framework model (to be completed by end 2025, adding Europam.eu and EUCAL.eu data on preventive and criminal regulation against corruption)
 - [Follow the Money](https://corruptiondata.eu/followthemoney/)  search engine powered and hosted by YouControl, a BridgeGap partner
  
@@ -79,7 +81,7 @@ See the full <a class="markdown font-bold" href="/indicator/">list of indicators
 
 For more questions on how to use EU Compass or consult Methodology: deristavi@transparency.org 
 
-Variables may have different citation requirements. Please respect them!
+Variables may have different citation requirements. <br />Please respect them!
  
 
  </div>
