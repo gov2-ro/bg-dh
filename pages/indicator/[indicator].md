@@ -49,7 +49,7 @@ Attribution: {indicatorMeta[0].Attribution}
             data={ziIndicators} 
             areaCol="ISO3 Country"
             geoJsonUrl="/ne_110m_admin_0_countries.geojson"
-            geoId=sov_a3
+            geoId=gu_a3
             height=450
             value=Value
             legendType=scalar

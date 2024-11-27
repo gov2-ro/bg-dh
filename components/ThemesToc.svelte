@@ -16,7 +16,7 @@
 {#each qThemes as theme}
 <div class="level-0-wrapper mb-8 pb-8">
     <h2><b>{theme.Name}</b></h2>
-    <div class="description"><span class="bg-lime-50 p-1">{theme.Description}</span></div>
+    <div class="xdescription bg-slate-100 p-2 rounded-md leading-tight text-base">  {theme.Description}</div>
     <div class="level-0">
     {#each qComponents as component}
         {#if component.ThemeID == theme.ID}
@@ -50,7 +50,7 @@
     div:empty {display: none;}
     div:not(.level-2) {margin-bottom: 1ex;}
     h2 {margin:.75ex 0; font-size: 1.4em;}
-    
+
     .level-2 {font-size: .9em;}
     
     .level-1-wrapper {break-inside: avoid;  }
@@ -68,10 +68,6 @@
     @media (min-width: 1480px) {
         .level-0 {column-count: 3;}
     }
-    .icon {
-      color: red;
-      width: 32px;
-      height: 32px;
-    }
-     .mb-4.mt-3 {margin-top: 0 !important; background-color: #f9f900; }
+  
+
 </style>
