@@ -32,8 +32,7 @@ export let data;
 					<a href="/theme/enforcement/" class="markdown block border p-2  s-_UQRdPseueYe">Enforcement</a>
 					<a href="/theme/freedom-of-expression/" class="border block p-2 markdown s-_UQRdPseueYe">Freedom of Expression</a>  
 					<a href="/theme/internet-empowerement/" class="border block p-2 markdown s-_UQRdPseueYe">Internet Empowerment</a> 
-				</div>
-			 
+				</div> 
 		</div>
 	</div> 
  
