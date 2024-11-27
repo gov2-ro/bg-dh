@@ -66,16 +66,16 @@ We proxy those here as parts of a public integrity framework consisting of  [Tra
 
 <div class="xcol-span-2 p-4 pt-0">
 
----
+
 
 This website covers 41 countries, including EU Member States and accession countries. **However, the coverage of indicators may be dissimilar, especially on direct indicators.**
 
 As of November 2024 EU Compass is already ready to use due to pooling of a first set of data from consortium members, although it will grow considerably over the next two years with granular regulation and enforcement data.
 </div>
 
-<div>
- 
----
+<div class="">
+<div class="text-xl  text-center  mb-4 bg-yellow-50	 border p-2 rounded" >
+See the full <a class="markdown font-bold" href="/indicator/">list of indicators </a></div>
 
 For more questions on how to use EU Compass or consult Methodology: deristavi@transparency.org 
 
@@ -86,22 +86,12 @@ Variables may have different citation requirements. Please respect them!
 
  </div>
 
-<div class="px-4">
 
- ## Full Indicator List
-
-<DataTable data={ziToc} rows=all groupBy=Theme_Name  groupsOpen=false >
-  <Column id=Theme_Name/> 
-	<Column id=Component_Name /> 
-	<Column id=Indicator_Link contentType=link linkLabel=Indicator_Name  /> 
-</DataTable>
-
-</div>
-
-
- 
 
 ---
+
+---
+
 
 <div style="height: 33rem; width: 33rem; " class="float-right">
   <InteractiveSVG1 src="/assets/dh-pie.svg"  /> 
