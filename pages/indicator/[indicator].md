@@ -31,6 +31,19 @@ Attribution: {indicatorMeta[0].Attribution}
 
 
 <Tabs>
+  <Tab label="Map">
+       
+        <AreaMap 
+            data={ziIndicators} 
+            areaCol="ISO3 Country"
+            geoJsonUrl="/ne_110m_admin_0_countries.geojson"
+            geoId=iso_a3
+            height=450
+            value=Value
+            legendType=scalar
+        />
+   
+    </Tab>
     <Tab label="Bar">
         <BarChart 
             data={ziIndicators}
@@ -43,19 +56,7 @@ Attribution: {indicatorMeta[0].Attribution}
         />
     </Tab>
         
-    <Tab label="Map">
-       
-        <AreaMap 
-            data={ziIndicators} 
-            areaCol="ISO3 Country"
-            geoJsonUrl="/ne_110m_admin_0_countries.geojson"
-            geoId=gu_a3
-            height=450
-            value=Value
-            legendType=scalar
-        />
-   
-    </Tab>
+  
    <!-- <Tab label="Table">
    <DataTable data={ziIndicators} 
    rows=all
@@ -112,23 +113,17 @@ SELECT  DISTINCT TRY_CAST(Year AS FLOAT) AS Year  from datahub.Data WHERE Indica
 ```
 
 ```sql ziIndicators
-
 -- SELECT "ISO3 Country", Year, TRY_CAST(Value AS FLOAT) AS Value from datahub.Data WHERE Indicator_ID = '${params.indicator}' AND Year = ${inputs.ziYears.value}  AND Value NOT LIKE 0 ORDER BY Value DESC
 SELECT "ISO3 Country", Year, TRY_CAST(Value AS FLOAT) AS Value from datahub.Data WHERE Indicator_ID = '${params.indicator}' AND Year = ${inputs.ziYears.value} ORDER BY Value DESC
 -- SELECT "ISO3 Country", Year, Value from datahub.Data WHERE Indicator_ID = '${params.indicator}' AND Year = ${inputs.ziYears.value} ORDER BY Value DESC
-
-
 ```
 
 ```sql ziIndicatorsAll
-
 --  SELECT "ISO3 Country", Year, ROUND(CAST(Value AS FLOAT),1) AS Value  from datahub.Data WHERE Indicator_ID = '${params.indicator}'    
  SELECT "ISO3 Country", Year, ROUND(TRY_CAST(Value AS FLOAT)) AS Value  from datahub.Data WHERE Indicator_ID = '${params.indicator}' ORDER BY "ISO3 Country" ASC    
-
 ```
 
 ```sql IndicatorPath
-
 SELECT 
     Indicators.id AS Indicator_ID,
     Indicators.Name AS Indicator_Name,
@@ -148,11 +143,9 @@ JOIN
     Datasets ON Indicators.Dataset = Datasets.id
 WHERE 
     Indicators.id = '${params.indicator}';  
-
 ```
 
 ```sql siblingIndicators
-
 SELECT 
     Indicators.id,
     Indicators.Description,
@@ -170,7 +163,6 @@ WHERE
     AND Indicators.id != '${params.indicator}'
 ORDER BY 
     Indicators.Name;
-
 ```
 
 
