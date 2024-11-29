@@ -1,5 +1,5 @@
 ---
-title: Indicators
+title: Full Indicators List
 ---
 
 ```sql ziToc
@@ -26,20 +26,27 @@ JOIN
     Datasets ON Indicators.Dataset = Datasets.id
 
 ```
- 
 
-<DataTable data={ziToc} rows=all groupBy=Theme_Name  groupsOpen=false >
+
+---
+
+<ThemesTocStatic />
+
+ <!--
+
+<div class="lightToc">
+<DataTable data={ziToc} rows=all groupBy=Theme_Name groupsOpen=false >
   <Column id=Theme_Name/> 
 	<Column id=Component_Name /> 
 	<Column id=Indicator_Link contentType=link linkLabel=Indicator_Name  /> 
 </DataTable>
+</div>
 
- 
-
+  
 # Detalied view
 
 Use the list below to browse Themes, Components and Indicators descriptions. <br/><small>Note: Click on <span class="bg-slate-200 px-2 py-1 text-sm rounded">Details</span> to see the indicators for each theme's components.</small>
 
 ---
 
-<ThemesTocStatic />
+-->
