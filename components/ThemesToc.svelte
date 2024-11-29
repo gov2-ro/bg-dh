@@ -13,6 +13,8 @@
     <ChevronCircleUp />
   </div> -->
  
+
+
 {#each qThemes as theme}
 <div class="level-0-wrapper mb-8 pb-8">
     <h2 class="bg-sky-200 px-3 pt-1 pb-0 text-xl rounded-t inline-block font-bold">{theme.Name}</h2>

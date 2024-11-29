@@ -1,170 +1,71 @@
 <script>
     import { buildQuery } from "@evidence-dev/component-utilities/buildQuery";
-    let menuOpen = false;
+    // import ChevronCircleUp from 'svelte-icons/fa/FaChevronCircleUp.svelte';
     const qThemes = buildQuery("select * from Themes", "nonssr");   
-    const qComponents = buildQuery("select * from Components", "nonssr");   
-    const qIndicators = buildQuery("select * from Indicators", "nonssr");   
-
-    function toggleMenuItem(event) {
-        const item = event.currentTarget.parentNode;
-        item.classList.toggle('open');
-    }
+	const qComponents = buildQuery("select * from Components", "nonssr");   
+	const qIndicators = buildQuery("select * from Indicators", "nonssr");   
 </script>
-
-<button class="menu-toggle" on:click={() => menuOpen = !menuOpen}>
-    ☰ Menu
-</button>
-
+  
+  <!-- <div class="icon">    <ChevronCircleUp />  </div> -->
+ 
 <nav>
-    <ul class="menu {menuOpen ? 'open' : ''}">
+   
+<div class=" ">
+    <button id="mobileToggle" class="md:hidden">Browse Themes</button>
+    <div class="themesWrapper hidden md:block ">
         {#each qThemes as theme}
-            <li class="menu-item">
-                <a href="#" on:click|preventDefault={toggleMenuItem}>{theme.Name}</a>
-                <ul class="dropdown">
-                    {#each qComponents as component}
-                        {#if component.Theme == theme.id}
-                            <li class="dropdown-item">
-                                <a href="#" on:click|preventDefault={toggleMenuItem}>{component.Name}</a>
-                                <ul class="sub-dropdown">
-                                    {#each qIndicators as indicator}
-                                        {#if indicator.Component == component.id}
-                                            <li><a href="/indicator/{indicator.id}">{indicator.Name}</a></li>
-                                        {/if}
-                                    {/each}
-                                </ul>
-                            </li>
-                        {/if}
-                    {/each}
-                </ul>
-            </li>
+        <div class="Theme group inline-block"> 
+            <button aria-haspopup="true" aria-controls="menu" class="outline-none focus:outline-none  text-sm p-1 bg-slate-900 rounded-sm flex items-center min-w-32"> <span class="xpr-1  flex-1">{theme.Name}</span> <!--<span> &#9013; </span>--> </button>
+            <ul id="menu" aria-hidden="true" class="bg-slate-800 border rounded-sm transform scale-0 group-hover:scale-100 absolute origin-top min-w-32 z-10">
+                {#each qComponents as component}
+                {#if component.ThemeID == theme.ID}
+                <li class="Component rounded-sm relative  hover:bg-slate-700"> 
+                    <button aria-haspopup="true" aria-controls="menu-lang" class="w-full px-3 py-1 text-left flex items-center outline-none focus:outline-none">
+                        <span class="pr-1 flex-1">{component.Name}</span>
+                    </button>
+                    <ul class="absolute top-0 left-full -ml-1 bg-slate-700 border rounded-sm min-w-32 z-20 delay-200">
+                        {#each qIndicators as indicator}
+                        {#if indicator.Component == component.id}
+                        <li class="Indicator  hover:bg-slate-900">
+                            <a class="px-3 py-1 inline-block" href="/indicator/{indicator.id}">{indicator.Name}</a>
+                        </li>
+                        {/if}            
+                        {/each}
+                    </ul>
+                </li> 
+                {/if}
+                {/each}
+            </ul>      
+        </div>
         {/each}
-    </ul>
+    </div>
+</div>
 </nav>
 
 <style>
-    .menu-toggle {
-        display: none;
+    nav:hover .themesWrapper.hidden{display: block !important;}
+    @media screen and  (max-width: 768px) {
+        
+    nav .Theme.inline-block {
+        display: block !important;
+        }
     }
-
-    /* Desktop styles */
-    @media screen and (min-width: 769px) {
-        nav {
-            display: flex;
-            justify-content: center;
-        }
-        .menu {
-            list-style: none;
-            display: flex;
-            padding: 0;
-            margin: 0;
-        }
-        .menu-item {
-            position: relative;
-            margin-right: 20px;
-        }
-        .menu-item > a {
-            text-decoration: none;
-            padding: 10px;
-            display: block;
-        }
-        .dropdown,
-        .sub-dropdown {
-            display: none;
-            position: absolute;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            background-color: #fff;
-        }
-        .menu-item:hover > .dropdown,
-        .dropdown-item:hover > .sub-dropdown {
-            display: block;
-        }
-        .dropdown-item {
-            position: relative;
-            background-color: #f9f9f9;
-        }
-        .dropdown-item > a {
-            text-decoration: none;
-            padding: 10px;
-            display: block;
-        }
+    @media screen and  (max-width: 960px) {
+        nav .themesWrapper.hidden {display: none !important;}
+        nav button#mobileToggle {display: inline-block !important;}
+        nav:hover .themesWrapper.hidden{display: block !important;}
+     
     }
     
-    ul.dropdown {z-index: 3;}
-    ul.dropdown ul {z-index: 5;}
-    ul.dropdown,
-    ul.dropdown ul {z-index: 5; width: auto; max-width: 66em;  font-size: 15px; box-shadow: 1px 2px 3px rgba(0,0,0,.2); }
-    ul.sub-dropdown {
-          margin-left: -75%;
-          z-index: 8; 
-          width: auto; max-width: 60em; 
-        }
+    li>ul {transform: translatex(100%) scale(0);}
+    li>button svg {transform: rotate(-90deg);}
+    li:hover>button svg {transform: rotate(-270deg);}
+    li:hover > ul {transform: translatex(-101%) scale(1); /* Flip to the left */}
     
-    ul.dropdown ul * {width: auto; max-width: 60em !important; }
-    ul.dropdown li {
-        line-height: 1.2;
-        margin-bottom: .3ex;
-        padding: .5ex .75ex;
-     }
-     ul.dropdown li:not(:last-child) {border-bottom: 1px solid #CCC;}
-    ul.dropdown ul li:hover {background-color: #fCfCc0; }
+    
+    li.Indicator {min-width: 11em;}
 
-    /* Mobile styles */
-    @media screen and (max-width: 768px) {
-        .menu-toggle {
-            display: block;
-            margin: 10px;
-        }
-        nav {
-            display: block;
-        }
-        .menu {
-            display: none;
-            flex-direction: column;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .menu.open {
-            display: flex;
-        }
-        .menu-item {
-            margin-right: 0;
-        }
-        .menu-item > a,
-        .dropdown-item > a {
-            display: block;
-            padding: 10px;
-            text-decoration: none;
-            color: #000;
-        }
-        .dropdown,
-        .sub-dropdown {
-            display: none;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-       
-        .menu-item.open > .dropdown,
-        .dropdown-item.open > .sub-dropdown {
-            display: block;
-        }
-        .menu-item > a::after,
-        .dropdown-item > a::after {
-            content: '+';
-            float: right;
-        }
-        .menu-item.open > a::after,
-        .dropdown-item.open > a::after {
-            content: '-';
-        }
-        .menu-item > a {
-            cursor: pointer;
-        }
-        .dropdown-item > a {
-            cursor: pointer;
-        }
-    }
+    .group-hover:scale-100 {transform: scale(1);}
+    ul:empty,
+    li.Component button:has(+ :empty) {display: none;}
 </style>
