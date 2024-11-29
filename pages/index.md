@@ -53,9 +53,20 @@ SELECT
 - EU Compass analytical database, pooling data at national level following the UNODC Statistical Framework model (to be completed by end 2025, adding Europam.eu and EUCAL.eu data on preventive and criminal regulation against corruption)
 - [Follow the Money](https://corruptiondata.eu/followthemoney/)  search engine powered and hosted by YouControl, a BridgeGap partner
  
+ This website covers 41 countries, including EU Member States and accession countries. **However, the coverage of indicators may be dissimilar, especially on direct indicators.**
+
+ As of November 2024 EU Compass is already ready to use due to pooling of a first set of data from consortium members, although it will grow considerably over the next two years with granular regulation and enforcement data.
+
+</div>
+<div>
+<div style="width: 30em;" class=" "><InteractiveSVG1 src="/assets/dh-pie2.svg"  /> </div>
 </div>
 
+
+
 <div class="bg-sky-200 px-6 rounded-md pt-2">
+
+
 
     ## How does EU Compass work?
 
@@ -66,17 +77,11 @@ SELECT
 </div>
 
 
-<div class="xcol-span-2 p-4 pt-0">
-
-    This website covers 41 countries, including EU Member States and accession countries. **However, the coverage of indicators may be dissimilar, especially on direct indicators.**
-
-    As of November 2024 EU Compass is already ready to use due to pooling of a first set of data from consortium members, although it will grow considerably over the next two years with granular regulation and enforcement data.
-</div>
 
 <div class="">
 
     <div class="flex mb-2 gap-4 ">
-
+<div class="md:w-20"></div>
         <div class="  text-center   bg-yellow-50	 border p-2 px-4 rounded shadow-sm" >
             See   <a class="markdown font-bold" href="/indicator/"> indicators </a>
         </div>
@@ -98,18 +103,10 @@ SELECT
 
  </div>
 
-<!--
 
-<div class="mt-10 pt-10">
 
----
-
- <div style="height: 33rem; width: 33rem; margin: auto;" >
-  <InteractiveSVG1 src="/assets/dh-pie.svg"  /> 
-</div> 
-</div>
--->
-
+ 
+ 
 
  <style>
  .xlist h3 {font-weight: bold;}
