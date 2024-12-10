@@ -1,0 +1,15 @@
+# This file was automatically generated
+name: datahubGsheets
+type: gsheets
+options: 
+  ratelimitms: 2500
+sheets:
+  source_one:
+    name: BG DataHub DB
+    id: 1yGoI8BINLMns9iymV-ZL5F8C8t34FqMdLvkYlrRxeJY
+    pages: 
+      - Indicators
+      - Data
+      - Themes
+      - Datasets
+      - Components

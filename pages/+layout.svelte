@@ -2,6 +2,7 @@
 // import "@evidence-dev/tailwind/fonts.css";
 import "../app.css";
 import { EvidenceDefaultLayout } from "@evidence-dev/core-components";
+    import ThemesNav from "../components/ThemesNav.svelte";
 export let data;
 </script>
 
@@ -16,28 +17,9 @@ export let data;
 	 	
 		<a href="/" class="text-sm leading-none  block" style="width: 8em;"><img src="/assets/icon strong negative mono.svg" style="height: 2.75em;" alt="BridgeGap" class="float-start mr-2" /><div class="" style="font-size: 1.15em;"><small class="text-gray-300">BridgeGap</small> <br/> <b>Datahub</b></div></a>
 	</div>    
-	<!--
-	<div class="md:hidden flex ml-5 gap-4">
-		<div class="">
-			<a href="/indicator/" class="border p-2 markdown">Indicators</a>
-		</div>
-		<div class="group  nav-indicators " style="width: 20em;">
-		 
-				<div class=" ">
-					<a href="#" class="border p-2 markdown">Themes</a>
-				</div>
-				<div class=" px-4 grid bg-sky-100 hidden group-hover:block mt-10 pt-10">
-					<div class="mt-10">&nbsp;</div>
-					<a href="/theme/transparency/" class="border p-2 markdown block s-_UQRdPseueYe">Transparency</a>
-					<a href="/theme/regulation/" class="border p-2 markdown blocks-_UQRdPseueYe">Regulation</a> 
-					<a href="/theme/enforcement/" class="markdown block border p-2  s-_UQRdPseueYe">Enforcement</a>
-					<a href="/theme/freedom-of-expression/" class="border block p-2 markdown s-_UQRdPseueYe">Freedom of Expression</a>  
-					<a href="/theme/internet-empowerement/" class="border block p-2 markdown s-_UQRdPseueYe">Internet Empowerment</a> 
-				</div> 
-		</div>
-	</div>  -->
  
-	<div class="oo"> <ThemesNavStatic />  </div>
+  <ThemesNav />   
+
 	<div class="flex gap-2 text-sm items-center ">  
 		&rarr; <a href="https://corruptiondata.eu/" title="back to BridgeGap">
 			<img src="/assets/icon strong negative.png" style="height: 2.5em;" alt="BridgeGap" /></a>
@@ -68,5 +50,29 @@ export let data;
 	.nav-indicators:hover div.hidden {
 		display: block !important;
 	}
-	
+	nav:hover .themesWrapper.hidden{display: block !important;}
+    @media screen and  (max-width: 768px) {
+        
+    nav .Theme.inline-block {
+        display: block !important;
+        }
+    }
+    @media screen and  (max-width: 960px) {
+        nav .themesWrapper.hidden {display: none !important;}
+        nav button#mobileToggle {display: inline-block !important;}
+        nav:hover .themesWrapper.hidden{display: block !important;}
+     
+    }
+    
+    li>ul {transform: translatex(100%) scale(0);}
+    li>button svg {transform: rotate(-90deg);}
+    li:hover>button svg {transform: rotate(-270deg);}
+    li:hover > ul {transform: translatex(-101%) scale(1); /* Flip to the left */}
+    
+    
+    li.Indicator {min-width: 11em;}
+
+    .group-hover:scale-100 {transform: scale(1);}
+    ul:empty,
+    li.Component button:has(+ :empty) {display: none;}
 </style>
