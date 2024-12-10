@@ -124,7 +124,7 @@ Attribution: {indicatorMeta[0].Attribution}
     />
    </Tab> -->
     <Tab label="Heatmap">
-        <div id="ttt" style="width: {13 * years.length}em;  ">
+        <div class="w-64" style="width: {13 * years.length}em;  ">
             <Heatmap 
                 data={ziIndicatorsAll} 
                 x=Year 
@@ -140,26 +140,25 @@ Attribution: {indicatorMeta[0].Attribution}
 
 ---
 
+{#if siblingIndicators.length !== 0}
 
-## Other Indicators of the _{IndicatorPath[0].Component_Name}_ component
+### Other Indicators of the **{IndicatorPath[0].Component_Name}** component
 
-<div class="xlist">
+
+
+<div class="grid xl:grid-cols-2 2xl:grid-cols-3 gap-5">
  {#each siblingIndicators as indicator}
  
-    <h3><a class="type-indicator markdown" href="/indicator/{indicator.id}"><b>{indicator.Name}</b></a></h3>
-    <p>{indicator.Description}</p> 
+    <div class=" my-1">
+        <h3><a class="type-indicator markdown" href="/indicator/{indicator.id}"><b>{indicator.Name}</b></a></h3>
+        <p>{indicator.Description}</p>
+    </div>
 
     
  {/each}
  </div>
-
- <style>
- .xlist h3 {font-weight: bold;}
- .xlist p {line-height: 1.2;margin-bottom: 1ex; font-size: .9em;}
-
-#ttt   { margin: 0 auto; max-width: 60em;}
-
- </style>
+{/if}
+ 
 
 <!-- {@partial "indicator-list.md"} -->
 
