@@ -3,9 +3,9 @@
     import { QueryLoad, Skeleton } from '@evidence-dev/core-components';
 
     // import ChevronCircleUp from 'svelte-icons/fa/FaChevronCircleUp.svelte';
-    const qThemes = buildQuery("select * from Themes", "nonssr");   
-	const qComponents = buildQuery("select * from Components", "nonssr2");   
-	const qIndicators = buildQuery("select * from Indicators", "nonssr3");   
+    const qThemes = buildQuery("select * from datahubGsheets.dh_Themes", "nonssr");   
+	const qComponents = buildQuery("select * from datahubGsheets.dh_Components", "nonssr2");   
+	const qIndicators = buildQuery("select * from datahubGsheets.dh_Indicators", "nonssr3");   
 </script>
   
   <!-- <div class="icon">    <ChevronCircleUp />  </div> -->

@@ -8,7 +8,7 @@ hide_title: true
 
 ```sql Indicators
 
-SELECT * FROM Indicators WHERE Component = '${params.component}'
+SELECT * FROM datahubGsheets.dh_Indicators WHERE Component = '${params.component}'
 
 ```
 

@@ -7,13 +7,13 @@ hide_title: true
 
 ```sql Components
 
-SELECT * FROM Components WHERE Theme = '${params.theme}'
+SELECT * FROM datahubGsheets.dh_Components WHERE Theme = '${params.theme}'
 
 ```
 
 ```sql Indicators
 
-SELECT * FROM Indicators 
+SELECT * FROM datahubGsheets.dh_Indicators 
 
 ```
 

@@ -3,6 +3,67 @@ title: Indicator
 hide_title: true 
 ---
 
+
+```sql indicatorMeta
+select "id","Name","Description","Component","Dataset","Description - rules","Var Type","which is better","label MIN","label MAX","Attribution" FROM datahubGsheets.dh_Indicators  WHERE id = '${params.indicator}' 
+```
+
+```sql years
+SELECT  DISTINCT TRY_CAST(Year AS FLOAT) AS Year  from datahubGsheets.dh_Data WHERE Indicator_ID = '${params.indicator}' order by Year ASC
+```
+
+```sql ziIndicators
+-- SELECT "ISO3 Country", Year, TRY_CAST(Value AS FLOAT) AS Value from datahubGsheets.dh_Data WHERE Indicator_ID = '${params.indicator}' AND Year = ${inputs.ziYears.value}  AND Value NOT LIKE 0 ORDER BY Value DESC
+SELECT "ISO3 Country", Year, TRY_CAST(Value AS FLOAT) AS Value from datahubGsheets.dh_Data WHERE Indicator_ID = '${params.indicator}' AND Year = ${inputs.ziYears.value} ORDER BY Value DESC
+-- SELECT "ISO3 Country", Year, Value from datahubGsheets.dh_Data WHERE Indicator_ID = '${params.indicator}' AND Year = ${inputs.ziYears.value} ORDER BY Value DESC
+```
+
+```sql ziIndicatorsAll
+--  SELECT "ISO3 Country", Year, ROUND(CAST(Value AS FLOAT),1) AS Value  from datahubGsheets.dh_Data WHERE Indicator_ID = '${params.indicator}'    
+ SELECT "ISO3 Country", Year, ROUND(TRY_CAST(Value AS FLOAT)) AS Value  from datahubGsheets.dh_Data WHERE Indicator_ID = '${params.indicator}' ORDER BY "ISO3 Country" ASC    
+```
+
+```sql IndicatorPath
+SELECT 
+    dh_Indicators.id AS Indicator_ID,
+    dh_Indicators.Name AS Indicator_Name,
+    dh_Components.id AS Component_ID,
+    dh_Components.Name AS Component_Name,
+    dh_Themes.id AS Theme_ID,
+    dh_Themes.Name AS Theme_Name,
+    dh_Datasets.id AS Dataset_ID,
+    dh_Datasets.Name AS Dataset_Name
+FROM 
+    datahubGsheets.dh_Indicators
+JOIN 
+    datahubGsheets.dh_Components ON dh_Indicators.Component = dh_Components.id
+JOIN 
+    datahubGsheets.dh_Themes ON dh_Components.Theme = dh_Themes.id
+JOIN 
+    datahubGsheets.dh_Datasets ON dh_Indicators.Dataset = dh_Datasets.id
+WHERE 
+    dh_Indicators.id = '${params.indicator}';  
+```
+
+```sql siblingIndicators
+SELECT 
+    dh_Indicators.id,
+    dh_Indicators.Description,
+    dh_Indicators.Name
+FROM 
+    datahubGsheets.dh_Indicators
+JOIN 
+    datahubGsheets.dh_Components ON dh_Indicators.Component = dh_Components.id
+WHERE 
+    dh_Components.id = (
+        SELECT Component 
+        FROM datahubGsheets.dh_Indicators 
+        WHERE id = '${params.indicator}'
+    )
+    AND Indicators.id != '${params.indicator}'
+ORDER BY 
+    Indicators.Name;
+```
   
 # **{indicatorMeta[0].Name}**   {inputs.ziYears.value}
 
@@ -104,65 +165,5 @@ Attribution: {indicatorMeta[0].Attribution}
 
 
 
-```sql indicatorMeta
-select "id","Name","Description","Component","Dataset","Description - rules","Var Type","which is better","label MIN","label MAX","Attribution" FROM datahub.Indicators  WHERE id = '${params.indicator}' 
-```
-
-```sql years
-SELECT  DISTINCT TRY_CAST(Year AS FLOAT) AS Year  from datahub.Data WHERE Indicator_ID = '${params.indicator}' order by Year ASC
-```
-
-```sql ziIndicators
--- SELECT "ISO3 Country", Year, TRY_CAST(Value AS FLOAT) AS Value from datahub.Data WHERE Indicator_ID = '${params.indicator}' AND Year = ${inputs.ziYears.value}  AND Value NOT LIKE 0 ORDER BY Value DESC
-SELECT "ISO3 Country", Year, TRY_CAST(Value AS FLOAT) AS Value from datahub.Data WHERE Indicator_ID = '${params.indicator}' AND Year = ${inputs.ziYears.value} ORDER BY Value DESC
--- SELECT "ISO3 Country", Year, Value from datahub.Data WHERE Indicator_ID = '${params.indicator}' AND Year = ${inputs.ziYears.value} ORDER BY Value DESC
-```
-
-```sql ziIndicatorsAll
---  SELECT "ISO3 Country", Year, ROUND(CAST(Value AS FLOAT),1) AS Value  from datahub.Data WHERE Indicator_ID = '${params.indicator}'    
- SELECT "ISO3 Country", Year, ROUND(TRY_CAST(Value AS FLOAT)) AS Value  from datahub.Data WHERE Indicator_ID = '${params.indicator}' ORDER BY "ISO3 Country" ASC    
-```
-
-```sql IndicatorPath
-SELECT 
-    Indicators.id AS Indicator_ID,
-    Indicators.Name AS Indicator_Name,
-    Components.id AS Component_ID,
-    Components.Name AS Component_Name,
-    Themes.id AS Theme_ID,
-    Themes.Name AS Theme_Name,
-    Datasets.id AS Dataset_ID,
-    Datasets.Name AS Dataset_Name
-FROM 
-    Indicators
-JOIN 
-    Components ON Indicators.Component = Components.id
-JOIN 
-    Themes ON Components.Theme = Themes.id
-JOIN 
-    Datasets ON Indicators.Dataset = Datasets.id
-WHERE 
-    Indicators.id = '${params.indicator}';  
-```
-
-```sql siblingIndicators
-SELECT 
-    Indicators.id,
-    Indicators.Description,
-    Indicators.Name
-FROM 
-    Indicators
-JOIN 
-    Components ON Indicators.Component = Components.id
-WHERE 
-    Components.id = (
-        SELECT Component 
-        FROM Indicators 
-        WHERE id = '${params.indicator}'
-    )
-    AND Indicators.id != '${params.indicator}'
-ORDER BY 
-    Indicators.Name;
-```
 
 

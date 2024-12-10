@@ -3,43 +3,7 @@ title: Welcome to Datahub
 hide_title: true 
 ---
 
-```sql ziToc
 
-SELECT 
-    
-    Themes.Name AS Theme_Name,
-    Components.Name AS Component_Name,
-    Datasets.Name AS Dataset_Name,
-    Indicators.Name AS Indicator_Name,
-    Components.id AS Component_ID,
-    Indicators.id AS Indicator_ID,
-    Themes.id AS Theme_ID,    
-    Datasets.id AS Dataset_ID,
-    CONCAT('/indicator/', Indicator_ID) AS Indicator_Link
-    
-FROM 
-    Indicators
-JOIN 
-    Components ON Indicators.Component = Components.id
-JOIN 
-    Themes ON Components.Theme = Themes.id
-JOIN 
-    Datasets ON Indicators.Dataset = Datasets.id
-
-```
-
-```sql ziThemes
-
-SELECT 
-    id, Name, Description
-    From Themes
-  
-
-```
-
- 
- 
- 
 <div class="grid md:grid-cols-2 gap-6 ">
 <div class="">
  

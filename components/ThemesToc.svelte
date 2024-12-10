@@ -3,9 +3,9 @@
     // import ChevronCircleUp from 'svelte-icons/fa/FaChevronCircleUp.svelte';
 
     // export let ziTheme; // if to show a single theme?
-    const qThemes = buildQuery("select * from Themes", "nonssr1");   
-	const qComponents = buildQuery("select * from Components", "nonssr");   
-	const qIndicators = buildQuery("select * from Indicators", "nonssr");   
+    const qThemes = buildQuery("select * from datahubGsheets.dh_Themes", "nonssr1");   
+	const qComponents = buildQuery("select * from datahubGsheets.dh_Components", "nonssr");   
+	const qIndicators = buildQuery("select * from datahubGsheets.dh_Indicators", "nonssr");   
 </script>
 
   
