@@ -46,33 +46,4 @@ export let data;
 	
 </EvidenceDefaultLayout>
 
-<style>
-	.nav-indicators:hover div.hidden {
-		display: block !important;
-	}
-	nav:hover .themesWrapper.hidden{display: block !important;}
-    @media screen and  (max-width: 768px) {
-        
-    nav .Theme.inline-block {
-        display: block !important;
-        }
-    }
-    @media screen and  (max-width: 960px) {
-        nav .themesWrapper.hidden {display: none !important;}
-        nav button#mobileToggle {display: inline-block !important;}
-        nav:hover .themesWrapper.hidden{display: block !important;}
-     
-    }
-    
-    li>ul {transform: translatex(100%) scale(0);}
-    li>button svg {transform: rotate(-90deg);}
-    li:hover>button svg {transform: rotate(-270deg);}
-    li:hover > ul {transform: translatex(-101%) scale(1); /* Flip to the left */}
-    
-    
-    li.Indicator {min-width: 11em;}
-
-    .group-hover:scale-100 {transform: scale(1);}
-    ul:empty,
-    li.Component button:has(+ :empty) {display: none;}
-</style>
+ 

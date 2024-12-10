@@ -51,7 +51,7 @@ SELECT
 
 - All current databases used for research in [BridgeGap](https://corruptiondata.eu)  pooled by partners, at country and multicountry level
 - EU Compass analytical database, pooling data at national level following the UNODC Statistical Framework model (to be completed by end 2025, adding Europam.eu and EUCAL.eu data on preventive and criminal regulation against corruption)
-- [Follow the Money](https://corruptiondata.eu/followthemoney/)  search engine powered and hosted by YouControl, a BridgeGap partner
+- [Follow the Money](https://corruptiondata.eu/follow-the-money/)  search engine powered and hosted by YouControl, a BridgeGap partner
  
  This website covers 41 countries, including EU Member States and accession countries. **However, the coverage of indicators may be dissimilar, especially on direct indicators.**
 
