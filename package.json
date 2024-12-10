@@ -29,6 +29,7 @@
     "@evidence-dev/snowflake": "^1.2.1",
     "@evidence-dev/sqlite": "^2.0.6",
     "@evidence-dev/trino": "^1.0.8",
+    "evidence-connector-js": "^0.0.2",
     "svelte-icons": "^2.1.0"
   },
   "overrides": {
