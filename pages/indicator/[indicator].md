@@ -60,9 +60,9 @@ WHERE
         FROM datahubGsheets.dh_Indicators 
         WHERE id = '${params.indicator}'
     )
-    AND Indicators.id != '${params.indicator}'
+    AND dh_Indicators.id != '${params.indicator}'
 ORDER BY 
-    Indicators.Name;
+    dh_Indicators.Name;
 ```
   
 # **{indicatorMeta[0].Name}**   {inputs.ziYears.value}

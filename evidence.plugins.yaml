@@ -19,5 +19,5 @@ datasources:
   "@evidence-dev/trino": { }
   "@evidence-dev/motherduck": { }
   "@evidence-dev/connector-gsheets": { }
-  "evidence-connector-js": {}
+  
 
