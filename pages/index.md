@@ -22,8 +22,8 @@ hide_title: true
  As of November 2024 EU Compass is already ready to use due to pooling of a first set of data from consortium members, although it will grow considerably over the next two years with granular regulation and enforcement data.
 
 </div>
-<div>
-<div style="width: 30em;" class=" "><InteractiveSVG1 src="/assets/dh-pie2.svg"  /> </div>
+<div class="">
+<div style="width: 30em;" class="mx-auto"><InteractiveSVG1 src="/assets/dh-pie2.svg"  /> </div>
 </div>
 
 
@@ -43,23 +43,23 @@ hide_title: true
 
 
 <div class="">
-
-    <div class="flex mb-2 gap-4 ">
-<div class="md:w-20"></div>
-        <div class="  text-center   bg-yellow-50	 border p-2 px-4 rounded shadow-sm" >
+<!-- align #zzz items in center of flex -->
+    <div id="zzz" class="flex mb-2 gap-4 justify-center   ">
+         
+        <div class="   text-center   bg-yellow-50	 border p-2 px-4 rounded shadow-sm  " >
             See   <a class="markdown font-bold" href="/indicator/"> indicators </a>
         </div>
         <div class="bg-slate-50 text-center  p-2 border px-4 rounded shadow-sm">
             &rarr;  <a href="/downloads/" class="font-bold  markdown">download data</a>
         </div>
 
-        </div>
+    </div>
 
-        <div class="text-sm leading-none p-2 border-t mt-6 pt-3">
+    <div class="text-sm leading-none p-2 xl:mx-14 xl:px-10 border-t mt-6 pt-3">
 
         For more questions on how to use EU Compass or consult Methodology: deristavi@transparency.org 
 
-        Variables may have different citation requirements. <br />Please respect them!
+        Variables may have different citation requirements. Please respect them.
         
         </div>
 
