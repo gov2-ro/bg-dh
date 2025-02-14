@@ -22,10 +22,15 @@ SELECT * FROM datahubGsheets.dh_Indicators
 <div class="xlist">
  {#each Components as component}
  
-    <h3><a class="type-component markdown" href="/component/{component.id}">{component.Name}</a></h3>
-    <p>
+    <h3 class="mt-5 text-lg"><a class="type-component markdown" href="/component/{component.id}">{component.Name}</a></h3>
+    <p class="pb-5 border-b border-slate-500">
     {component.Description}
-    <br> Indicators:   <ChildIndicators ziIndicators = {Indicators} ziComponent = {component.id} /> 
+    <span class="block mt-2">
+       <b>Indicators</b>:
+       <span class="">
+          <ChildIndicators ziIndicators = {Indicators} ziComponent = {component.id} />
+       </span>
+    </span>
     </p>     
 
     

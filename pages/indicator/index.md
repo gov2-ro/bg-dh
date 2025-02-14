@@ -25,7 +25,8 @@ title: Full Indicators List
         <div class="level-1-wrapper p-0 rounded  mb-4 border border-slate-300 leading-tight group cursor-pointer">
             <h3 class="border-b border-slate-400 bg-slate-200 px-2 py-2 font-bold"> {component.Name}</h3>     
             <div class="description bg-slate-50 p-3 ">{component.Description}</div>
-            <div class="level-1 px-3 py-2 bg-slate-100 border shadow border-slate-300 hidden group-hover:block absolute">
+            <hr/>
+            <div class="level-1 px-3 py-2 bg-white border-top  border-slate-300 xhidden xgroup-hover:block xabsolute">
             {#each qIndicators as indicator}        
                 {#if indicator.Component == component.id}
                 <div class="level-2 mt-1 mb-2">

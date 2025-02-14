@@ -36,10 +36,9 @@ hide_title: true
 
     Control of corruption is the capacity of a society to constrain public authorities to act for general social welfare and not for the particular benefit of private individuals, groups or networks connected to the office holders. **Control of corruption results from a balance between opportunities for corruption and constraints, posed by societies and states.** 
 
-    We proxy those here as parts of a public integrity framework consisting of  [Transparency](/theme/transparency/), [Regulation](/theme/regulation/) , [Enforcement](/theme/regulation/), [Freedom of Expression](/theme/freedom-of-expression/)  and [Internet Empowerment](/theme/internet-empowerement/) . We also include direct indicators of corruption.
+    We proxy those here as parts of a public integrity framework consisting of  [Transparency](/theme/transparency/), [Regulation](/theme/regulation/) , [Enforcement](/theme/regulation/), [Freedom of Expression](/theme/freedom-of-expression/)  and [Internet Empowerment](/theme/internet-empowerment/) . We also include direct indicators of corruption.
 
 </div>
-
 
 
 <div class="">

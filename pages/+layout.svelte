@@ -2,7 +2,7 @@
 // import "@evidence-dev/tailwind/fonts.css";
 import "../app.css";
 import { EvidenceDefaultLayout } from "@evidence-dev/core-components";
-    import ThemesNav from "../components/ThemesNav.svelte";
+    import ThemesNav from "../components/ThemesNavStatic.svelte";
 export let data;
 </script>
 

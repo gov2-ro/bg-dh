@@ -89,7 +89,7 @@ Attribution: {indicatorMeta[0].Attribution}
     title="Select Year" 
 />
 
-
+ 
 
 <Tabs>
   <Tab label="Map">
@@ -99,7 +99,8 @@ Attribution: {indicatorMeta[0].Attribution}
             areaCol="ISO3 Country"
             geoJsonUrl="/ne_110m_admin_0_countries.geojson"
             geoId=iso_a3
-            height=450
+            height=1280
+            startingZoom = 4
             value=Value
             legendType=scalar
         />
@@ -166,3 +167,4 @@ Attribution: {indicatorMeta[0].Attribution}
 
 
 
+ 
