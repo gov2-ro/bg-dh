@@ -76,7 +76,7 @@
     li>ul {transform: translatex(100%) scale(0);}
     li>button svg {transform: rotate(-90deg);}
     li:hover>button svg {transform: rotate(-270deg);}
-    li:hover > ul {transform: translatex(-196%) translatey(4px) scale(1); /* Flip to the left */}
+    li:hover > ul {transform: translatex(-190%) translatey(4px) scale(1); /* Flip to the left */}
     
     
     li.Indicator {min-width: 11em;}

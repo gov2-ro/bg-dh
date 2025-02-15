@@ -81,15 +81,12 @@ Dataset: **{indicatorMeta[0].Dataset}**
 Attribution: {indicatorMeta[0].Attribution} 
 -->
 
-
 <Dropdown 
     data={years} 
     name=ziYears 
     value=Year 
     title="Select Year" 
 />
-
- 
 
 <Tabs>
   <Tab label="Map">
@@ -100,7 +97,6 @@ Attribution: {indicatorMeta[0].Attribution}
             geoJsonUrl="/ne_110m_admin_0_countries.geojson"
             geoId=iso_a3
             height=1280
-            startingZoom = 4
             value=Value
             legendType=scalar
         />
