@@ -36,7 +36,7 @@ export let data;
 	maxWidth=1800
 	fullWidth=true
 	hideSidebar
-	hideHeader
+	xhideHeader
 	hideTOC
 	hideBreadcrumbs=false
 	xProfile="https://twitter.com/bridgegap_eu"
