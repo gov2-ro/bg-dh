@@ -1,7 +1,6 @@
 Datasets Included in the Datahub
 
 # Datasets for download
-
  
     <table class="leading-tight">
         <thead>
@@ -30,9 +29,7 @@ Datasets Included in the Datahub
                 </td>
             </tr>
             <tr class=" border-b hover:bg-gray-50">
-                <td class="px-2 py-1">
-                    Corruption Perceptions Index
-                </td>
+                <td class="px-2 py-1">Corruption Perceptions Index</td>
                 <td class="px-2 py-1">
                     <small>N/A</small>
                 </td>
