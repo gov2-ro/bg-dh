@@ -3,6 +3,9 @@ title: Indicator
 hide_title: true 
 ---
 
+<script>
+  document.title = "This is the new page title.";
+</script>
 
 ```sql indicatorMeta
     select 
@@ -18,7 +21,7 @@ hide_title: true
         "label MAX",
         "Attribution",
         "Methodology Snapshot",
-        "Source",
+        "Source data",
         "Methodology" 
     FROM datahubGsheets.dh_Indicators  WHERE id = '${params.indicator}' 
 ```
@@ -28,132 +31,111 @@ SELECT  DISTINCT TRY_CAST(Year AS FLOAT) AS Year  from datahubGsheets.dh_Data WH
 ```
 
 ```sql ziIndicators
-WITH CountryData AS (
-  SELECT 
-    d."ISO3 Country", 
-    COALESCE(c.Name, d."ISO3 Country") AS "Country Name",
-    d.Year, 
-    TRY_CAST(d.Value AS FLOAT) AS Value,
-    c."EUM Status" AS group_type
-  FROM 
-    datahubGsheets.dh_Data d
-  LEFT JOIN
-    datahubGsheets.dh_countries c ON d."ISO3 Country" = c.ISO3
-  WHERE 
-    d.Indicator_ID = '${params.indicator}' 
-    AND d.Year = ${inputs.ziYears.value}
-),
-GroupAverages AS (
-  SELECT
-    'AVG: ' || group_type AS "ISO3 Country",
-    'AVG: ' || group_type AS "Country Name",
-    Year,
-    AVG(Value) AS Value,
-    'average' AS row_type
-  FROM
-    CountryData
-  WHERE
-    group_type IS NOT NULL
-  GROUP BY
-    group_type, Year
-),
-CombinedData AS (
-  SELECT
-    "ISO3 Country",
-    "Country Name",
-    Year,
-    Value,
-    'country' AS row_type
-  FROM
-    CountryData
-  UNION ALL
-  SELECT
-    "ISO3 Country",
-    "Country Name",
-    Year,
-    Value,
-    row_type
-  FROM
-    GroupAverages
-)
-SELECT * FROM CombinedData
-ORDER BY
-  CASE WHEN row_type = 'average' THEN 0 ELSE 1 END,
-  Value DESC
-```
-
-```sql ziIndicatorsAll
-SELECT 
-  d."ISO3 Country", 
-  COALESCE(c.Name, d."ISO3 Country") AS "Country Name",
-  d.Year, 
-  ROUND(TRY_CAST(d.Value AS FLOAT)) AS Value
-FROM 
-  datahubGsheets.dh_Data d
-LEFT JOIN
-  datahubGsheets.dh_countries c ON d."ISO3 Country" = c.ISO3
-WHERE 
-  d.Indicator_ID = '${params.indicator}'
-ORDER BY 
-  COALESCE(c.Name, d."ISO3 Country") ASC
+  WITH CountryData AS (
+    SELECT 
+      d."ISO3 Country", 
+      COALESCE(c.Name, d."ISO3 Country") AS "Country Name",
+      d.Year, 
+      TRY_CAST(d.Value AS FLOAT) AS Value,
+      c."EUM Status" AS group_type
+    FROM 
+      datahubGsheets.dh_Data d
+    LEFT JOIN
+      datahubGsheets.dh_countries c ON d."ISO3 Country" = c.ISO3
+    WHERE 
+      d.Indicator_ID = '${params.indicator}' 
+      AND d.Year = ${inputs.ziYears.value}
+  ),
+  GroupAverages AS (
+    SELECT
+      'AVG: ' || group_type AS "ISO3 Country",
+      'AVG: ' || group_type AS "Country Name",
+      Year,
+      AVG(Value) AS Value,
+      'average' AS row_type
+    FROM
+      CountryData
+    WHERE
+      group_type IS NOT NULL
+    GROUP BY
+      group_type, Year
+  ),
+  CombinedData AS (
+    SELECT
+      "ISO3 Country",
+      "Country Name",
+      Year,
+      Value,
+      'country' AS row_type
+    FROM
+      CountryData
+    UNION ALL
+    SELECT
+      "ISO3 Country",
+      "Country Name",
+      Year,
+      Value,
+      row_type
+    FROM
+      GroupAverages
+  )
+  SELECT * FROM CombinedData
+  ORDER BY
+    CASE WHEN row_type = 'average' THEN 0 ELSE 1 END,
+    Value DESC
 ```
 
 ```sql IndicatorPath
-SELECT 
-    dh_Indicators.id AS Indicator_ID,
-    dh_Indicators.Name AS Indicator_Name,
-    dh_Components.id AS Component_ID,
-    dh_Components.Name AS Component_Name,
-    dh_Themes.id AS Theme_ID,
-    dh_Themes.Name AS Theme_Name,
-    dh_Datasets.id AS Dataset_ID,
-    dh_Datasets.Name AS Dataset_Name
-FROM 
-    datahubGsheets.dh_Indicators
-JOIN 
-    datahubGsheets.dh_Components ON dh_Indicators.Component = dh_Components.id
-JOIN 
-    datahubGsheets.dh_Themes ON dh_Components.Theme = dh_Themes.id
-JOIN 
-    datahubGsheets.dh_Datasets ON dh_Indicators.Dataset = dh_Datasets.id
-WHERE 
-    dh_Indicators.id = '${params.indicator}';  
+  SELECT 
+      dh_Indicators.id AS Indicator_ID,
+      dh_Indicators.Name AS Indicator_Name,
+      dh_Components.id AS Component_ID,
+      dh_Components.Name AS Component_Name,
+      dh_Themes.id AS Theme_ID,
+      dh_Themes.Name AS Theme_Name,
+      dh_Datasets.id AS Dataset_ID,
+      dh_Datasets.Name AS Dataset_Name
+  FROM 
+      datahubGsheets.dh_Indicators
+  JOIN 
+      datahubGsheets.dh_Components ON dh_Indicators.Component = dh_Components.id
+  JOIN 
+      datahubGsheets.dh_Themes ON dh_Components.Theme = dh_Themes.id
+  JOIN 
+      datahubGsheets.dh_Datasets ON dh_Indicators.Dataset = dh_Datasets.id
+  WHERE 
+      dh_Indicators.id = '${params.indicator}';  
 ```
 
 ```sql siblingIndicators
-SELECT 
-    dh_Indicators.id,
-    dh_Indicators.Description,
-    dh_Indicators.Name
-FROM 
-    datahubGsheets.dh_Indicators
-JOIN 
-    datahubGsheets.dh_Components ON dh_Indicators.Component = dh_Components.id
-WHERE 
-    dh_Components.id = (
-        SELECT Component 
-        FROM datahubGsheets.dh_Indicators 
-        WHERE id = '${params.indicator}'
-    )
-    AND dh_Indicators.id != '${params.indicator}'
-ORDER BY 
-    dh_Indicators.Name;
+  SELECT 
+      dh_Indicators.id,
+      dh_Indicators.Description,
+      dh_Indicators.Name
+  FROM 
+      datahubGsheets.dh_Indicators
+  JOIN 
+      datahubGsheets.dh_Components ON dh_Indicators.Component = dh_Components.id
+  WHERE 
+      dh_Components.id = (
+          SELECT Component 
+          FROM datahubGsheets.dh_Indicators 
+          WHERE id = '${params.indicator}'
+      )
+      AND dh_Indicators.id != '${params.indicator}'
+  ORDER BY 
+      dh_Indicators.Name;
 ```
   
-# **{indicatorMeta[0].Name}**   {inputs.ziYears.value}
+# **{indicatorMeta && indicatorMeta[0] ? indicatorMeta[0].Name : "Loading..."}**   {inputs.ziYears.value}
+ 
 
-
-
-{indicatorMeta[0].Description}
-
+{indicatorMeta && indicatorMeta[0] ? indicatorMeta[0].Description : ""}
 
 <a class="markdown" href="/theme/{IndicatorPath[0].Theme_ID}">{IndicatorPath[0].Theme_Name}</a> / <a class="markdown"  href="/component/{IndicatorPath[0].Component_ID}">{IndicatorPath[0].Component_Name}</a>
 
 Dataset: <a class="markdown"  href="/dataset/{IndicatorPath[0].Dataset_ID}">{IndicatorPath[0].Dataset_Name}</a>
 
-
-
- 
 
 <Dropdown 
     data={years} 
@@ -161,6 +143,8 @@ Dataset: <a class="markdown"  href="/dataset/{IndicatorPath[0].Dataset_ID}">{Ind
     value=Year 
     title="Select Year" 
 />
+
+
 
 <Tabs>
   <Tab label="Map">
@@ -174,6 +158,8 @@ Dataset: <a class="markdown"  href="/dataset/{IndicatorPath[0].Dataset_ID}">{Ind
             height=1280
             value=Value
             legendType=scalar
+            borderWidth=2
+            borderColor=#FFE
             title="{indicatorMeta[0].Name} ({inputs.ziYears.value})"
             tooltipFmt="num2"
             echartsOptions={{
@@ -274,42 +260,14 @@ Dataset: <a class="markdown"  href="/dataset/{IndicatorPath[0].Dataset_ID}">{Ind
         </div>
      
     </Tab>
-        
-    <Tab label="Heatmap">
-        <div class="w-64" style="width: {13 * years.length}em;">
-            <Heatmap 
-                data={ziIndicatorsAll} 
-                x=Year 
-                y="Country Name" 
-                value=Value   
-                legend=true
-                filter=true
-                title="{indicatorMeta[0].Name} Over Time"
-                height="600px"
-                valueFmt="num2"
-                echartsOptions={{
-                  tooltip: {
-                    formatter: function(params) {
-                      return `${params.name} (${params.data[0]}): <strong>${parseFloat(params.value).toFixed(2)}</strong>`;
-                    }
-                  }
-                }}
-            />
-        </div>
-    </Tab>
-
-    <Tab label="Data">
-        <DataTable 
-            data={ziIndicatorsAll} 
-            rows=10
-            download=true
-            downloadFilename="{IndicatorPath[0].Theme_Name.replace(/[^a-zA-Z0-9]/g, '_')}_{indicatorMeta[0].Name.replace(/[^a-zA-Z0-9]/g, '_')}_data.csv"
-            title="Complete Dataset for {indicatorMeta[0].Name}"
-            height="400px"
-        />
-    </Tab>
+             
 </Tabs>
-<table class="align-top ">
+
+
+  <DownloadData data={ziIndicators} text="Download Data" queryID=bridgegap-{params.indicator}-{inputs.ziYears.value}/>
+
+
+<table class="align-top table-cells-padding">
 <thead>
 <tr class="border-b">
  <th colspan="2">Indicator Factsheet</th>
@@ -419,3 +377,8 @@ Dataset: <a class="markdown"  href="/dataset/{IndicatorPath[0].Dataset_ID}">{Ind
 
 
 
+<style>
+  .table-cells-padding th, .table-cells-padding td {
+  padding-right: 1ex;
+}
+  </style>

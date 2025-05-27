@@ -3,8 +3,7 @@ title: Theme
 hide_title: true 
 ---
 
-# Theme: **{params.theme}**
-
+ 
 ```sql Components
 
 SELECT * FROM datahubGsheets.dh_Components WHERE Theme = '${params.theme}'
@@ -16,6 +15,15 @@ SELECT * FROM datahubGsheets.dh_Components WHERE Theme = '${params.theme}'
 SELECT * FROM datahubGsheets.dh_Indicators 
 
 ```
+
+
+```sql CurrentTheme
+
+SELECT * FROM datahubGsheets.dh_Themes WHERE id = '${params.theme}'
+
+```
+
+# Theme: **{CurrentTheme[0].Name}**
 
 ## Components
 

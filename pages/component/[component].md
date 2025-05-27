@@ -4,13 +4,22 @@ hide_title: true
 ---
 
 
-# Component: **{params.component}**
+
 
 ```sql Indicators
 
 SELECT * FROM datahubGsheets.dh_Indicators WHERE Component = '${params.component}'
 
 ```
+
+```sql CurrentComponent
+
+SELECT * FROM datahubGsheets.dh_Components WHERE id = '${params.component}'
+
+```
+
+
+# Component: **{CurrentComponent[0].Name}**
 
 ## Indicators
 
