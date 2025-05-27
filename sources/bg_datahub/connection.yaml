@@ -1,7 +1,7 @@
 # This file was automatically generated
 name: datahubGsheets
 type: gsheets
-options: {}
+options: {ratelimitms: 2500}
 sheets:
   dh:
     name: BG DataHub DB gSheets
