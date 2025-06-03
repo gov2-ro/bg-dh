@@ -3,9 +3,6 @@ title: Indicator
 hide_title: true 
 ---
 
-<script>
-  document.title = "This is the new page title.";
-</script>
 
 ```sql indicatorMeta
     select 
@@ -34,6 +31,8 @@ SELECT  DISTINCT TRY_CAST(Year AS FLOAT) AS Year  from datahubGsheets.dh_Data WH
   WITH CountryData AS (
     SELECT 
       d."ISO3 Country", 
+      c.Flag,
+      CONCAT(COALESCE(c.Name, d."ISO3 Country"), ' ', c.Flag) AS FlagName, 
       COALESCE(c.Name, d."ISO3 Country") AS "Country Name",
       d.Year, 
       TRY_CAST(d.Value AS FLOAT) AS Value,
@@ -49,6 +48,8 @@ SELECT  DISTINCT TRY_CAST(Year AS FLOAT) AS Year  from datahubGsheets.dh_Data WH
   GroupAverages AS (
     SELECT
       'AVG: ' || group_type AS "ISO3 Country",
+      ' ' AS Flag,
+       'AVG: ' || group_type AS FlagName,
       'AVG: ' || group_type AS "Country Name",
       Year,
       AVG(Value) AS Value,
@@ -63,6 +64,8 @@ SELECT  DISTINCT TRY_CAST(Year AS FLOAT) AS Year  from datahubGsheets.dh_Data WH
   CombinedData AS (
     SELECT
       "ISO3 Country",
+      Flag,
+      FlagName,
       "Country Name",
       Year,
       Value,
@@ -72,6 +75,8 @@ SELECT  DISTINCT TRY_CAST(Year AS FLOAT) AS Year  from datahubGsheets.dh_Data WH
     UNION ALL
     SELECT
       "ISO3 Country",
+      Flag,
+      FlagName,
       "Country Name",
       Year,
       Value,
@@ -79,7 +84,15 @@ SELECT  DISTINCT TRY_CAST(Year AS FLOAT) AS Year  from datahubGsheets.dh_Data WH
     FROM
       GroupAverages
   )
-  SELECT * FROM CombinedData
+  SELECT 
+    *,
+    CASE 
+        WHEN row_type = 'average' THEN NULL
+        ELSE CAST(DENSE_RANK() OVER (ORDER BY CASE WHEN row_type = 'country' THEN Value END DESC) AS VARCHAR) 
+             || '/' || 
+             CAST(COUNT(CASE WHEN row_type = 'country' THEN 1 END) OVER () AS VARCHAR)
+    END AS ranking
+FROM CombinedData 
   ORDER BY
     CASE WHEN row_type = 'average' THEN 0 ELSE 1 END,
     Value DESC
@@ -126,29 +139,38 @@ SELECT  DISTINCT TRY_CAST(Year AS FLOAT) AS Year  from datahubGsheets.dh_Data WH
   ORDER BY 
       dh_Indicators.Name;
 ```
-  
-# **{indicatorMeta && indicatorMeta[0] ? indicatorMeta[0].Name : "Loading..."}**   {inputs.ziYears.value}
+
+<a class="markdown" href="/theme/{IndicatorPath[0].Theme_ID}">{IndicatorPath[0].Theme_Name}</a> / <a class="markdown" href="/component/{IndicatorPath[0].Component_ID}">{IndicatorPath[0].Component_Name}</a>
+
+# **{indicatorMeta && indicatorMeta[0] ? indicatorMeta[0].Name : "Loading..."}** {inputs.ziYears.value} 
  
-
-{indicatorMeta && indicatorMeta[0] ? indicatorMeta[0].Description : ""}
-
-<a class="markdown" href="/theme/{IndicatorPath[0].Theme_ID}">{IndicatorPath[0].Theme_Name}</a> / <a class="markdown"  href="/component/{IndicatorPath[0].Component_ID}">{IndicatorPath[0].Component_Name}</a>
-
-Dataset: <a class="markdown"  href="/dataset/{IndicatorPath[0].Dataset_ID}">{IndicatorPath[0].Dataset_Name}</a>
-
+{indicatorMeta && indicatorMeta[0] ? indicatorMeta[0].Description : ""} <a href="#factsheet">  <Info description="See Indicator Factsheet below the chart" /></a>
 
 <Dropdown 
     data={years} 
     name=ziYears 
     value=Year 
+    order=Year 
     title="Select Year" 
-/>
+    class="font-semibold p-2"
+/> 
 
-
-
+<div class="bg-gray-100 border inline-block rounded-md p-1">
+  <DownloadData data={ziIndicators} text="Download Data" queryID=bridgegap-{params.indicator}-{inputs.ziYears.value} class="text-gray-950 font-semibold " />
+</div>
+ 
 <Tabs>
   <Tab label="Map">
-       
+        
+        <!-- <h2 class=""><span class="font-semibold">{indicatorMeta[0].Name}</span> ({inputs.ziYears.value})</h2> -->
+
+         {#if indicatorMeta[0]["which is better"] || (indicatorMeta[0]["label MIN"] && indicatorMeta[0]["label MAX"])}
+        <div class="text-sm text-gray-600">
+          {#if indicatorMeta[0]["which is better"]}
+            <u>Note</u>: For this indicator, {indicatorMeta[0]["which is better"].toLowerCase()} values are better.  {indicatorMeta[0]["label MIN"]} to {indicatorMeta[0]["label MAX"]} 
+          {/if}
+        </div>
+        {/if}
         <AreaMap 
             data={ziIndicators} 
             areaCol="ISO3 Country"
@@ -158,21 +180,26 @@ Dataset: <a class="markdown"  href="/dataset/{IndicatorPath[0].Dataset_ID}">{Ind
             height=1280
             value=Value
             legendType=scalar
+            legendPosition=topLeft
             borderWidth=2
-            borderColor=#FFE
-            title="{indicatorMeta[0].Name} ({inputs.ziYears.value})"
-            tooltipFmt="num2"
-            echartsOptions={{
-              tooltip: {
-                formatter: function(params) {
-                  return `${params.name}: <strong>${parseFloat(params.value).toFixed(2)}</strong>`;
-                }
-              }
-            }}
+            borderColor=#FFE       
+            tooltip={[
+                {id: 'Flag',  showColumnName: false, valueClass: 'text-3xl inline'},
+                {id: 'Country Name',  showColumnName: false, valueClass: 'inline text-base'},
+                {id: 'Value', fmt: 'num2', showColumnName: false, valueClass: 'text-xl font-semibold'},                
+                {id: 'ranking', fmt: 'num0', showColumnName: false, valueClass: ''}                
+            ]}                                   
         />
    
     </Tab>
     <Tab label="Bar">
+         {#if indicatorMeta[0]["which is better"] || (indicatorMeta[0]["label MIN"] && indicatorMeta[0]["label MAX"])}
+        <div class="text-sm text-gray-600">
+          {#if indicatorMeta[0]["which is better"]}
+            <u>Note</u>: For this indicator, {indicatorMeta[0]["which is better"].toLowerCase()} values are better.  {indicatorMeta[0]["label MIN"]} to {indicatorMeta[0]["label MAX"]} 
+          {/if}
+        </div>
+        {/if}
         <div class="mb-3">
           <div class="flex gap-4 justify-end mb-2">
             <div class="flex items-center gap-1">
@@ -190,10 +217,11 @@ Dataset: <a class="markdown"  href="/dataset/{IndicatorPath[0].Dataset_ID}">{Ind
           </div>
           <BarChart 
               data={ziIndicators}
-              x="Country Name"
+              x="FlagName"
               y=Value
               swapXY=true
               yFmt= num2
+              labels=true
               title="{indicatorMeta[0].Name} for {inputs.ziYears.value}"
               seriesField="row_type"
               echartsOptions={{ 
@@ -239,18 +267,7 @@ Dataset: <a class="markdown"  href="/dataset/{IndicatorPath[0].Dataset_ID}">{Ind
                     }
                   }
                 ],
-                tooltip: {
-                  formatter: function(params) {
-                    let value = params.data.Value.toFixed(2);
-                    let label = params.data["Country Name"];
-                    
-                    if (label.startsWith("AVG:")) {
-                      return `<strong>${label}</strong><br>Value: <strong>${value}</strong>`;
-                    } else {
-                      return `${label}: <strong>${value}</strong>`;
-                    }
-                  }
-                },
+        
                 grid: {
                   right: '5%',
                   containLabel: true
@@ -258,104 +275,83 @@ Dataset: <a class="markdown"  href="/dataset/{IndicatorPath[0].Dataset_ID}">{Ind
               }}
           />
         </div>
-     
     </Tab>
-             
 </Tabs>
 
-
-  <DownloadData data={ziIndicators} text="Download Data" queryID=bridgegap-{params.indicator}-{inputs.ziYears.value}/>
-
-
-<table class="align-top table-cells-padding">
+<table class="align-top table-cells-padding text-sm border rounded-sm" id="factsheet">
 <thead>
-<tr class="border-b">
- <th colspan="2">Indicator Factsheet</th>
+<tr class="border-b border-gray-200">
+ <th colspan="2" class="text-left text-lg p-1 pl-2 bg-gray-200 border-b">Indicator Factsheet</th>
 </tr>
 </thead>
 <tbody>
-<tr class="border-b">
-<td>Name</td>
-<td>{indicatorMeta[0].Name}</td>
+
+<tr class="border-b border-gray-200">
+<td class="align-top bg-gray-100 p-1 pl-2">Theme</td>
+<td class="align-top p-1 pl-2"><a class="markdown" href="/theme/{IndicatorPath[0].Theme_ID}">{IndicatorPath[0].Theme_Name}</a></td>
 </tr>
-<tr class="border-b">
-<td>Description</td>
-<td>{indicatorMeta[0].Description}</td>
+<tr class="border-b border-gray-200">
+<td class="align-top bg-gray-100 p-1 pl-2">Component</td>
+<td class="align-top p-1 pl-2"><a class="markdown" href="/component/{IndicatorPath[0].Component_ID}">{IndicatorPath[0].Component_Name}</a>
+</td>
+</tr>
+<tr class="border-b border-gray-200">
+<td class="align-top bg-gray-100 p-1 pl-2">Dataset</td>
+<td class="align-top p-1 pl-2"><a class="markdown"  href="/dataset/{IndicatorPath[0].Dataset_ID}">{IndicatorPath[0].Dataset_Name}</a>
+</td>
+</tr>
+
+<tr class="border-b border-gray-200">
+  <td class="align-top bg-gray-100 p-1 pl-2">Name</td><td class="align-top p-1 pl-2"> {indicatorMeta[0].Name} </td>
+</tr>
+<tr class="border-b border-gray-200">
+  <td class="align-top bg-gray-100 p-1 pl-2">Description</td><td class="align-top p-1 pl-2">{indicatorMeta[0].Description}</td>
 </tr>
 
  
  {#if indicatorMeta[0]["Methodology Snapshot"]}
   
-  <tr class="border-b">
-  <td>Methodology <br/>snapshot</td>
-  <td class="whitespace-pre-line">{indicatorMeta[0]["Methodology Snapshot"]}</td>
-  
+  <tr class="border-b border-gray-200">
+    <td class="align-top bg-gray-100 p-1 pl-2">Methodology <br/>snapshot</td>  <td class="whitespace-pre-line p-1 pl-2">{indicatorMeta[0]["Methodology Snapshot"]}</td>
   </tr>
     
   {/if}
 
-          {#if indicatorMeta[0]["label MIN"] && indicatorMeta[0]["label MAX"]}
-            
-            <tr class="border-b">
-              <td>Scale</td>
-              <td class="whitespace-pre-line">{indicatorMeta[0]["label MIN"]} to {indicatorMeta[0]["label MAX"]} 
-              
-              {#if indicatorMeta[0]["which is better"]}
-<br/>            Note: For this indicator, {indicatorMeta[0]["which is better"].toLowerCase()} values are better.
-          {/if}
-              </td>
-            </tr>
-
-          {/if}
+  {#if indicatorMeta[0]["label MIN"] && indicatorMeta[0]["label MAX"]}
+    <tr class="border-b border-gray-200">
+      <td class="align-top bg-gray-100 p-1 pl-2">Scale</td><td class="whitespace-pre-line p-1 pl-2"> {indicatorMeta[0]["label MIN"]} to {indicatorMeta[0]["label MAX"]} 
+      {#if indicatorMeta[0]["which is better"]}  <br/>Note: For this indicator, {indicatorMeta[0]["which is better"].toLowerCase()} values are better.  {/if}
+      </td>
+    </tr>
+  {/if}
 
  {#if indicatorMeta[0]["Source"] && indicatorMeta[0]["Source"].trim() && indicatorMeta[0]["Source"].trim().startsWith('http')}
-
-<tr>
-<td>Source</td>
-<td><a href="{indicatorMeta[0]['Source'].trim()}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">{indicatorMeta[0]['Source'].trim()}</a></td>
-</tr>
-      
+  <tr class="border-b border-gray-200">
+    <td class="align-top bg-gray-100 p-1 pl-2">Source</td><td class="align-top p-1 pl-2"><a href="{indicatorMeta[0]['Source'].trim()}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">{indicatorMeta[0]['Source'].trim()}</a></td>
+  </tr>      
 {/if}
 
-
  {#if indicatorMeta[0]["Methodology"] && indicatorMeta[0]["Methodology"].trim() && indicatorMeta[0]["Methodology"].trim().startsWith('http')}
-
-<tr>
-<td>Methodology</td>
-<td><a href="{indicatorMeta[0]['Methodology'].trim()}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">{indicatorMeta[0]['Methodology'].trim()}</a></td>
-</tr>
-      
+  <tr class="border-b border-gray-200">
+    <td class="align-top bg-gray-100 p-1 pl-2">Methodology</td>  <td class="align-top p-1 pl-2"><a href="{indicatorMeta[0]['Methodology'].trim()}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">{indicatorMeta[0]['Methodology'].trim()}</a></td>
+  </tr>      
 {/if}
 
 
 {#if indicatorMeta[0].Attribution}
-<tr class="border-b">
-  <td>Attribution </td>
-  <td>{indicatorMeta[0].Attribution}</td>
+<tr class="border-b border-gray-200">
+  <td class="align-top bg-gray-100 p-1 pl-2">Attribution </td>
+  <td class="align-top p-1 pl-2">{indicatorMeta[0].Attribution}</td>
 </tr>
 {/if}
 </tbody>
 </table>
-
- 
-  {#if indicatorMeta[0]["which is better"] || (indicatorMeta[0]["label MIN"] && indicatorMeta[0]["label MAX"])}
-        <div class="text-sm text-gray-600 mt-2 italic">
-          {#if indicatorMeta[0]["which is better"]}
-            Note: For this indicator, {indicatorMeta[0]["which is better"].toLowerCase()} values are better.
-          {/if}
-
-        </div>
-        {/if}
- 
- 
 
 ---
 
 {#if siblingIndicators.length !== 0}
 
 ### Other Indicators of the **{IndicatorPath[0].Component_Name}** component
-
-
 
 <div class="grid xl:grid-cols-2 2xl:grid-cols-3 gap-5">
  {#each siblingIndicators as indicator}
@@ -378,7 +374,6 @@ Dataset: <a class="markdown"  href="/dataset/{IndicatorPath[0].Dataset_ID}">{Ind
 
 
 <style>
-  .table-cells-padding th, .table-cells-padding td {
-  padding-right: 1ex;
-}
+  
+ 
   </style>

@@ -23,7 +23,7 @@ hide_title: true
 
 </div>
 <div class="">
-<div style="width: 550px;" class="mx-auto"><InteractiveMap /> </div>
+<div style="width: 550px; max-width: 90vw;" class="mx-auto"><InteractiveMap /> </div>
 </div>
 
 

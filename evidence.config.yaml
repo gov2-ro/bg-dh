@@ -1,6 +1,6 @@
 appearance:
-  default: light
-  switcher: true
+    default: light
+    switcher: true
 
 theme:
   colorPalettes:
@@ -58,6 +58,8 @@ theme:
       light: "#dc2626"
       dark: "#f87171"
 
+
+
 plugins:
   components:
     # This loads all of evidence's core charts and UI components
@@ -67,9 +69,16 @@ plugins:
   datasources:
     # You can add additional datasources here by adding npm packages. 
     # Make to also add them to `package.json`.
+    "@evidence-dev/bigquery": { }
     "@evidence-dev/csv": { }
+    "@evidence-dev/databricks": { }
     "@evidence-dev/duckdb": { }
     "@evidence-dev/mssql": { }
     "@evidence-dev/mysql": { }
+    "@evidence-dev/postgres": { }
+    "@evidence-dev/source-javascript": { }
+    "@evidence-dev/snowflake": { }
     "@evidence-dev/sqlite": { }
+    "@evidence-dev/trino": { }
+    "@evidence-dev/motherduck": { }
     "@evidence-dev/connector-gsheets": { }
